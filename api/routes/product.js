@@ -45,6 +45,16 @@ router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
   }
 });
 
+// Delete all products
+router.delete("/", verifyTokenAndAdmin, async (req, res) => {
+  try {
+    await Product.deleteMany({});
+    res.status(200).json("All products have been deleted");
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 // Get Product
 
 router.get("/find/:id", async (req, res) => {

@@ -1,9 +1,9 @@
 export const sliderItems = [
   {
     id: 1,
-    img: "https://images.hugoboss.com/is/image/boss/2bs_header?$large$&align=0,-1&fit=crop,1&hei=945&op_brightness=-0&ts=1520875252673&wid=1680",
+    img: "https://www.colehaan.com/on/demandware.static/-/Sites-ColeHaan_US-Library/en_US/dw69670236/images/20240627_Flip/Cole-Haan-New-Arrivals-L.webp",
     title: "SUMMER SALE",
-    desc: "WEAR SMART AND BLEND INTO THE STREETS ON YOUR NEW CLOTHING'S FROM KIMI.",
+    desc: "WEAR SMART AND BLEND INTO THE STREETS ON YOUR NEW SHOES'S FROM SHOESTYLE.",
   },
   {
     id: 2,
@@ -18,27 +18,46 @@ export const sliderItems = [
     desc: "WEAR FORMALLY AND PLAY CASUALLY IN THE SAME DRESS.",
   },
 ];
-
 export const categories = [
   {
     id: 1,
-    img: "https://images.unsplash.com/photo-1507680434567-5739c80be1ac?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
-    title: "Shirts",
-    categories: "shirts",
+    img: "https://www.colehaan.com/on/demandware.static/-/Sites-ColeHaan_US-Library/en_US/dwfc57a019/images/20240627_Flip/Cole-Haan-New-Mens-L.webp",
+    title: "Men's Shoes",
+    categories: "men",
   },
   {
     id: 2,
-    img: "https://images.pexels.com/photos/3538028/pexels-photo-3538028.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-    title: "Pants",
-    categories: "pants",
+    img: "https://www.colehaan.com/on/demandware.static/-/Sites-ColeHaan_US-Library/en_US/dwff7d0e09/images/20240627_Flip/Cole-Haan-New-Womens.webp",
+    title: "Women's Shoes",
+    categories: "women",
   },
   {
     id: 3,
-    img: "https://images.pexels.com/photos/2010812/pexels-photo-2010812.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-    title: "Sweaters & Cardigans",
-    categories: "sweaters",
+    img: "https://www.colehaan.com/on/demandware.static/-/Sites-ColeHaan_US-Library/en_US/dw38db2cf1/images/20240627_Flip/Cole-Haan-Sneakers.webp",
+    title: "Sneakers",
+    categories: "sneakers",
   },
 ];
+// export const categories = [
+//   {
+//     id: 1,
+//     img: "https://images.unsplash.com/photo-1507680434567-5739c80be1ac?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
+//     title: "Shirts",
+//     categories: "shirts",
+//   },
+//   {
+//     id: 2,
+//     img: "https://images.pexels.com/photos/3538028/pexels-photo-3538028.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+//     title: "Pants",
+//     categories: "pants",
+//   },
+//   {
+//     id: 3,
+//     img: "https://images.pexels.com/photos/2010812/pexels-photo-2010812.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
+//     title: "Sweaters & Cardigans",
+//     categories: "sweaters",
+//   },
+// ];
 
 export const popularProducts = [
   {
