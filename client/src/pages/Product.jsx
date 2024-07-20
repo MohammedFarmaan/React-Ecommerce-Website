@@ -8,6 +8,8 @@ import { mobile } from "../responsive";
 import { useState, useEffect } from "react";
 import { publicRequest } from "../requestMethods";
 import { useLocation } from "react-router-dom";
+import { addProduct } from "../redux/cartRedux";
+import { useDispatch } from "react-redux";
 
 const Container = styled.div``;
 
@@ -123,6 +125,9 @@ const Product = ({ cat, filters, sort }) => {
   const id = location.pathname.split("/")[2];
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
+  const [color, setColor] = useState("");
+  const [size, setSize] = useState("");
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const getProduct = async () => {
@@ -141,6 +146,18 @@ const Product = ({ cat, filters, sort }) => {
       setQuantity(quantity + 1);
     }
   };
+
+  const handleClick = () => {
+    // Update Cart
+    dispatch(
+      addProduct({
+        ...product,
+        quantity,
+        color,
+        size,
+      })
+    );
+  };
   return (
     <Container>
       {/* <Announcement /> */}
@@ -156,15 +173,21 @@ const Product = ({ cat, filters, sort }) => {
           <FilterContainer>
             <Filter>
               <FilterTitle>Colour</FilterTitle>
+              {/* Works for colour array */}
               {Array.isArray(product.colour) &&
                 product.colour.map((c) => (
-                  <FilterColour color={c.toLowerCase()} key={c} />
+                  <FilterColour
+                    color={c.toLowerCase()}
+                    key={c}
+                    onClick={() => setColor(c)}
+                  />
                 ))}
+              {/* Works only for Single colour */}
               {/* <FilterColour color={product.colour} /> */}
             </Filter>
             <Filter>
               <FilterTitle>Size</FilterTitle>
-              <FilterSize>
+              <FilterSize onChange={(e) => setSize(e.target.value)}>
                 {Array.isArray(product.size) &&
                   product.size.map((s) => (
                     <FilterSizeOption key={s}>
@@ -180,7 +203,7 @@ const Product = ({ cat, filters, sort }) => {
               <Amount>{quantity}</Amount>
               <Add onClick={() => handleQuantity("inc")} />
             </AmountContainer>
-            <Button>ADD TO CART</Button>
+            <Button onClick={handleClick}>ADD TO CART</Button>
           </AddContainer>
         </InfoContainer>
       </Wrapper>
