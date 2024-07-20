@@ -1,7 +1,3 @@
-Sure! Here’s the updated README with sections for adding sample images:
-
----
-
 # Shoestyle Web Application
 
 Shoestyle is a full-featured web application built for showcasing and selling stylish footwear. It is built with React, MongoDB, Redux, Stripe, Express, and Node.js.
