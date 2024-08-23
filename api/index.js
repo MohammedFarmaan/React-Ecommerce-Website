@@ -32,7 +32,13 @@ app.use(
     credentials: true,
   })
 );
-app.get("/favicon.ico", (req, res) => res.status(204));
+app.use(function (req, res, next) {
+  if (req.originalUrl && req.originalUrl.split("/").pop() === "favicon.ico") {
+    return res.sendStatus(204);
+  }
+
+  next();
+});
 app.use(express.json());
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
