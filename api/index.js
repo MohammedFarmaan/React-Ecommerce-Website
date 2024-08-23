@@ -17,12 +17,21 @@ mongoose
   .catch((err) => {
     console.log("DB Not Connected");
   });
+app.get("/", () => {
+  res.json("hello");
+});
 
 app.get("/api/test", () => {
   console.log("Test is successful");
 });
 
-app.use(cors());
+app.use(
+  cors({
+    origin: ["https://react-ecommerce-website-frontend.vercel.app"],
+    methods: ["GET", "POST"],
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
