@@ -2,9 +2,10 @@ import styled from "styled-components";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { mobile } from "../responsive";
+import { useLocation } from "react-router-dom";
 
 const Container = styled.div`
-  height: 60vh;
+  height: 70vh;
   margin: 10px;
   display: flex;
   align-items: center;
@@ -31,14 +32,23 @@ const Desc = styled.p`
   margin: 20px 0px;
 `;
 const PaymentSuccess = () => {
+  const location = useLocation();
   return (
     <>
       <Navbar />
-
       <Container>
         <Wrapper>
-          <Button>GO BACK</Button>
+          <img
+            className="img"
+            src="https://media.istockphoto.com/vectors/order-success-icon-vector-id882905872?k=20&m=882905872&s=170667a&w=0&h=oKyeMMsffutor2B0f2ZDvbwUj74KW22IZa52e9V2QEA="
+            alt="order success"
+            width="150"
+            height="150"
+          />
           <Desc>Your order is successful</Desc>
+          <a href="/">
+            <Button>GO BACK</Button>
+          </a>
         </Wrapper>
       </Container>
       <Footer />

@@ -4,12 +4,20 @@ import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { mobile } from "../responsive";
+import { useSelector } from "react-redux";
+// import { useEffect, useState } from "react";
+// import { userRequest } from "../requestMethods";
+// import { useHistory } from "react-router-dom";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+import CheckoutForm from "../components/CheckoutForm";
 
 const Container = styled.div``;
 
 const Wrapper = styled.div`
   padding: 20px;
   ${mobile({ padding: "10px" })}
+  padding-bottom: 100px;
 `;
 
 const Title = styled.h1`
@@ -57,6 +65,7 @@ const Product = styled.div`
   display: flex;
   justify-content: space-between;
   ${mobile({ flexDirection: "column" })}
+  padding: 1rem;
 `;
 
 const ProductDetail = styled.div`
@@ -123,8 +132,8 @@ const Hr = styled.hr`
 
 const Summary = styled.div`
   flex: 1;
-  border: 0.5px solid #343a40;
-  border-radius: 10px;
+  /* border: 0.5px solid #343a40;
+  border-radius: 10px; */
   padding: 20px;
   height: 50vh;
 `;
@@ -156,6 +165,27 @@ const Button = styled.button`
 `;
 
 const Cart = () => {
+  const cart = useSelector((state) => state.cart);
+  // const history = useHistory();
+  const stripePromise = loadStripe(process.env.REACT_APP_STRIPE);
+
+  // useEffect(() => {
+  //   const makeRequest = async () => {
+  //     try {
+  //       const res = await userRequest.post("/checkout/payment", {
+  //         tokenId: stripeToken.id,
+  //         amount: 500,
+  //       });
+  //       history.push("/success", {
+  //         stripeData: res.data,
+  //         products: cart,
+  //       });
+  //     } catch {}
+  //   };
+  //   stripeToken && makeRequest();
+  // }, [stripeToken, cart.total, history]);
+
+  // const KEY = process.env.REACT_APP_STRIPE;
   return (
     <Container>
       {/* <Announcement/> */}
@@ -172,63 +202,48 @@ const Cart = () => {
         </Top>
         <Bottom>
           <Info>
-            <Product>
-              <ProductDetail>
-                <Image src="https://assets.burberry.com/is/image/Burberryltd/9DC5ED1F-47D7-4563-9998-2702FC726184.jpg?$BBY_V2_SL_1x1$&wid=1876&hei=1876" />
-                <Details>
-                  <ProductName>
-                    <b>Product:</b> Burberry T-Shirt
-                  </ProductName>
-                  <ProductId>
-                    <b>ID:</b> 000000001
-                  </ProductId>
-                  <ProductColour color="black" />
-                  <ProductSize>
-                    <b>Size:</b>M
-                  </ProductSize>
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Add />
-                  <ProductAmount>2</ProductAmount>
-                  <Remove />
-                </ProductAmountContainer>
-                <ProductPrice>₹ 11,999</ProductPrice>
-              </PriceDetail>
-            </Product>
+            {cart.products.map((product) => (
+              <Product key={product._id}>
+                {" "}
+                {/* Ensure you have a unique key */}
+                <ProductDetail>
+                  <Image src={product.image} />
+                  <Details>
+                    <ProductName>
+                      <b>Product:</b> {product.title}
+                    </ProductName>
+                    <ProductId>
+                      <b>ID:</b> {product._id}
+                      {/* Ensure you use the actual product ID */}
+                    </ProductId>
+                    <ProductColour color={product.color} />
+                    <ProductSize>
+                      <b>Size:</b>
+                      {product.size}
+                    </ProductSize>
+                  </Details>
+                </ProductDetail>
+                <PriceDetail>
+                  <ProductAmountContainer>
+                    <Add />
+                    <ProductAmount>{product.quantity}</ProductAmount>{" "}
+                    {/* Display the quantity */}
+                    <Remove />
+                  </ProductAmountContainer>
+                  <ProductPrice>
+                    ₹ {product.price * product.quantity}
+                  </ProductPrice>{" "}
+                  {/* Calculate total price based on quantity */}
+                </PriceDetail>
+              </Product>
+            ))}
             <Hr />
-            <Product>
-              <ProductDetail>
-                <Image src="https://assets.burberry.com/is/image/Burberryltd/3F084BE9-0C70-4B9B-99B4-52DAC20E0B22.jpg?$BBY_V2_SL_1x1$&wid=1876&hei=1876" />
-                <Details>
-                  <ProductName>
-                    <b>Product:</b> Burberry Joggers
-                  </ProductName>
-                  <ProductId>
-                    <b>ID:</b> 000000002
-                  </ProductId>
-                  <ProductColour color="black" />
-                  <ProductSize>
-                    <b>Size:</b>M
-                  </ProductSize>
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Add />
-                  <ProductAmount>2</ProductAmount>
-                  <Remove />
-                </ProductAmountContainer>
-                <ProductPrice>₹ 8,999</ProductPrice>
-              </PriceDetail>
-            </Product>
           </Info>
           <Summary>
             <SummaryTitle>Order Summary</SummaryTitle>
             <SummaryItem>
               <SummaryItemText>Subtotal</SummaryItemText>
-              <SummaryItemPrice>₹ 20,998</SummaryItemPrice>
+              <SummaryItemPrice>₹ {cart.total}</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Estimated Shipping</SummaryItemText>
@@ -240,9 +255,11 @@ const Cart = () => {
             </SummaryItem>
             <SummaryItem type="total">
               <SummaryItemText>Total</SummaryItemText>
-              <SummaryItemPrice>₹ 20,998</SummaryItemPrice>
+              <SummaryItemPrice>₹ {cart.total}</SummaryItemPrice>
             </SummaryItem>
-            <Button>Checkout Now</Button>
+            <Elements stripe={stripePromise}>
+              <CheckoutForm amount={cart.total} cart={cart} />
+            </Elements>
           </Summary>
         </Bottom>
       </Wrapper>
