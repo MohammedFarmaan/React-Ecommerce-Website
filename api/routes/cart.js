@@ -1,5 +1,5 @@
 const { query } = require("express");
-const Cart = require("../models/cart");
+const Cart = require("../models/Cart");
 const {
   verifyToken,
   verifyTokenAndAuthorization,
