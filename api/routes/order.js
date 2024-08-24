@@ -1,5 +1,5 @@
 const { query } = require("express");
-const Order = require("../models/order");
+const Order = require("../models/Order");
 const {
   verifyToken,
   verifyTokenAndAuthorization,
