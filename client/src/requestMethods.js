@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE_URL = "http://localhost:4000/api";
+const BASE_URL = "https://react-ecommerce-website-api.onrender.com/api";
 const TOKEN = process.env.TOKEN;
 export const publicRequest = axios.create({
   baseURL: BASE_URL,

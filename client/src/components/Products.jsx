@@ -100,8 +100,8 @@ const Products = ({ cat, filters, sort }) => {
       try {
         const res = await axios.get(
           cat
-            ? `http://localhost:4000/api/products?category=${cat}`
-            : "http://localhost:4000/api/products"
+            ? `https://react-ecommerce-website-api.onrender.com/api/products?category=${cat}`
+            : "https://react-ecommerce-website-api.onrender.com/api/products"
         );
         // console.log("Fetched products:", res.data); // Log API response
         setProducts(res.data);
