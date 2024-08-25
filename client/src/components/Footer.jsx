@@ -89,11 +89,8 @@ const Footer = () => {
       <Left>
         <Logo>SHOESTYLE.</Logo>
         <Desc>
-          Quis eiusmod non et non ut id sint ea in. Do eiusmod laborum excepteur
-          ex irure non consectetur ipsum esse. Amet irure duis quis enim
-          occaecat aute aliquip velit cillum mollit occaecat excepteur
-          incididunt nostrud. Excepteur qui ut id dolore consectetur est id amet
-          est irure.
+          Shoestyle is a full-featured leather shop with luxury leather goods
+          and selling stylish footwear
         </Desc>
         <SocialContainer>
           <SocialIcon color="3b5999">
